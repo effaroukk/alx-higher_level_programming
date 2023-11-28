@@ -8,5 +8,23 @@
  */
 int check_cycle(listint_t *list)
 {
+	listint_t *red, *black;
+
+		if (!list || !list->next)
+			return (0);
+	red = list;
+	black = list;
+
+	while (black != NULL && red != NULL && red->next != NULL)
+	{
+		black = black->next;
+		red = red->next->next;
+
+		if (red == black)
+		{
+			return (1);
+		}
+	}
+	return (0);
 
 }
