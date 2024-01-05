@@ -1,1 +1,1 @@
-0x05-python-exceptions
+Everything is object
