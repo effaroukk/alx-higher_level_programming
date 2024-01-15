@@ -2,14 +2,14 @@
 """Defines unittests for base.py.
 
 Unittest classes:
-    TestBase_instantiation - line 23
-    TestBase_to_json_string - line 110
-    TestBase_save_to_file - line 156
-    TestBase_from_json_string - line 234
-    TestBase_create - line 288
-    TestBase_load_from_file - line 340
-    TestBase_save_to_file_csv - line 406
-    TestBase_load_from_file_csv - line 484
+    TestBase_instantiation - line 21
+    TestBase_to_json_string - line 108
+    TestBase_save_to_file - line 154
+    TestBase_from_json_string - line 232
+    TestBase_create - line 286
+    TestBase_load_from_file - line 338
+    TestBase_save_to_file_csv - line 404
+    TestBase_load_from_file_csv - line 482
 """
 import os
 import unittest
@@ -26,7 +26,7 @@ class TestBase_instantiation(unittest.TestCase):
         b2 = Base()
         self.assertEqual(b1.id, b2.id - 1)
 
-        def test_three_bases(self):
+    def test_three_bases(self):
         b1 = Base()
         b2 = Base()
         b3 = Base()
@@ -51,7 +51,7 @@ class TestBase_instantiation(unittest.TestCase):
         b.id = 15
         self.assertEqual(15, b.id)
 
-        def test_nb_instances_private(self):
+    def test_nb_instances_private(self):
         with self.assertRaises(AttributeError):
             print(Base(12).__nb_instances)
 
@@ -77,7 +77,6 @@ class TestBase_instantiation(unittest.TestCase):
         self.assertEqual((1, 2), Base((1, 2)).id)
 
     def test_set_id(self):
-
         self.assertEqual({1, 2, 3}, Base({1, 2, 3}).id)
 
     def test_frozenset_id(self):
@@ -204,7 +203,8 @@ class TestBase_save_to_file(unittest.TestCase):
             self.assertTrue(len(f.read()) == 39)
 
     def test_save_to_file_overwrite(self):
-        s = Square(9, 2, 39, 2)Square.save_to_file([s])
+        s = Square(9, 2, 39, 2)
+        Square.save_to_file([s])
         s = Square(10, 7, 2, 8)
         Square.save_to_file([s])
         with open("Square.json", "r") as f:
@@ -363,6 +363,7 @@ class TestBase_load_from_file(unittest.TestCase):
         Rectangle.save_to_file([r1, r2])
         list_rectangles_output = Rectangle.load_from_file()
         self.assertEqual(str(r2), str(list_rectangles_output[1]))
+
     def test_load_from_file_rectangle_types(self):
         r1 = Rectangle(10, 7, 2, 8, 1)
         r2 = Rectangle(2, 4, 5, 6, 2)
@@ -416,7 +417,7 @@ class TestBase_save_to_file_csv(unittest.TestCase):
             pass
         try:
             os.remove("Base.csv")
-            except IOError:
+        except IOError:
             pass
 
     def test_save_to_file_csv_one_rectangle(self):
@@ -468,7 +469,6 @@ class TestBase_save_to_file_csv(unittest.TestCase):
         Square.save_to_file_csv([])
         with open("Square.csv", "r") as f:
             self.assertEqual("[]", f.read())
-                        self.assertEqual("[]", f.read())
 
     def test_save_to_file_csv_no_args(self):
         with self.assertRaises(TypeError):
@@ -543,6 +543,7 @@ class TestBase_load_from_file_csv(unittest.TestCase):
     def test_load_from_file_csv_more_than_one_arg(self):
         with self.assertRaises(TypeError):
             Base.load_from_file_csv([], 1)
+
 
 if __name__ == "__main__":
     unittest.main()
